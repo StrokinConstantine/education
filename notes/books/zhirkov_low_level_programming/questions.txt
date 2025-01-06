@@ -1,0 +1,15 @@
+Question 11. What does instruction xor rdi, rdi do?
+	This instruction efficiently zero out a register rdi.
+	
+Question 12. What is the program return code?
+	Program returns value stored in rdi, in our case program returns zero, that means program has finished without errors.
+	
+Question 13. What is the first argument of the exit system call?
+	The first argument of the exit system call is the exit code in rdi register.
+
+Question 14. Check that the ASCII codes mentioned in the last example are correct.
+	The ASCII code of '4' is 52 = 0x34, the ASCII code of 'a' is 97 = 0x61, so all mentioned codes are correct.
+	
+Question 15. What is the difference between sar and shr? Check Intel docs.
+
+Question 16 How do you write numbers in different number systems in a way understandable to NASM? Check NASM documentation.
