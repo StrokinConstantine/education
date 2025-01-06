@@ -1,0 +1,10 @@
+
+Windows
+
+wsl --install -d Ubuntu
+wsl --set-default Ubuntu
+wsl
+sudo su
+apt install nasm gcc make gdb 
+
+

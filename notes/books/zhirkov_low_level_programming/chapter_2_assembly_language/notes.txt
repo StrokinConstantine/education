@@ -1,0 +1,6 @@
+In Unix everyting is a file.
+System calls <-> interface between user applications and the OS, enabling programs to request services from the OS.
+Three files ( with FDs, 0, 1, 2 ) opened as soon as a program starts.
+stderr ( FD = 2 ) is used to output information about the program execution process but not its results.
+Global variables = data, available in every moment of the program execution.
+Labels = readable names for addresses.
