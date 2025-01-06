@@ -13,7 +13,7 @@ _start:; global label
 
 .loop:; local label with full name _start.loop ( because _start is the last used dotless global label ) 
 	push rax; saves value of rax onto the stack
-	sub rcx, 4; prepares to shift the number to isolate the next 4 bits
+	sub rcx, 4; <-> iterator decrement
 
 	; rax -- eax -- ax -- ah + al
 	; rcx -- ecx -- cx -- ch + cl
@@ -33,7 +33,7 @@ _start:; global label
 
 	pop rax
 	test rcx, rcx; checks if rcx is zero by performing a bitwise AND
-	jnz .loop; if rcx is not zero, jumps back to .loop
+	jnz .loop; if rcx is not zero, jumps back to .loop, same instruction as jnz _start.loop
 
 	mov rax, 60
 	xor rdi, rdi
