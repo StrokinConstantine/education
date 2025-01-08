@@ -19,8 +19,17 @@ _start:
 	mov rdi, 1; argument 1, file descriptor ( where to write )
 	mov rsi, message; argument 2, where does the string start? 
 	mov rdx, 14; argument 3, how many bytes to write?
+	
 	syscall; system call in *nix systems, changes rcx and r11
 	
+	mov byte[ message ], 1; here we have to provide size explicitly
+	mov word[ message ], 2
+	mov dword[ message ], 3
+	mov qword[ message ], 4
+	
+	push word 1
+	push qword 2
+
 	mov rax, 60; exit syscall number
 	xor rdi, rdi; effective zeroing
 	SYSCALL; assembly language is case insensitive

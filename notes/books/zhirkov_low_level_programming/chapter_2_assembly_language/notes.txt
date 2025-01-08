@@ -7,47 +7,7 @@ Labels = readable names for addresses.
 Callee-saved registers must be restored by the procedure being called. So, if it needs to change them, it has to change them back ( rbx, rbp, rsp, r12 - r15 ).
 Caller-saved registers should be saved before invoking a function and restored after ( All other registers ).
 rax stores return value, rdx can be used to store the second return value.
-
-
-
-
-Save all caller-saved registers you want to survive function call (you can use push for that).
-• Store arguments in the relevant registers (rdi, rsi, etc.). 
-• Invoke function using call.
- • After function returns, rax will hold the return value.
- Restore caller-saved registers stored before the function call.
- 
- 
- Big endian multibyte numbers are stored in memory starting with the most significant bytes.
-• Little endian multibyte numbers are stored in memory starting with the least significant bytes
-
-
-
-Constant Precomputation It is not uncommon to see such code:
-lab: db 0 ... mov rax, lab + 1 + 2*3
-NASM supports arithmetic expressions with parentheses and bit operations. Such expressions can only
-include constants known to the compiler. This way it can precompute all such expressions and insert the computation results (as constant numbers) in executable code. So, such expressions are NOT calculated at runtime. A runtime analogue would need to use such instructions as add or mul.
-
-
-string length before string vs null-terminated strings
-
-
-we can get compilation errors. In such cases we have to provide size explicitly as shown below:
-section .data test: dq -1
-section .text
-mov byte[test], 1 ;1 mov word[test], 1 ;2 mov dword[test], 1 ;4 mov qword[test], 1 ;8
-
-
-
-addressing.asm mov rax, [rbx + 4* rcx + 9] mov rax, [4*r9] mov rdx, [rax + rbx] lea rax, [rbx + rbx * 4] ; rax = rbx * 5 add r8, [9 + rbx*8 + 7]
-
-
-
-A big picture You can think about byte, word, etc. as about type specifiers. For instance, you can either
-push 16-, 32-, or 64-bit numbers into the stack. Instruction push 1 is unclear about how many bits wide the operand is. In the same way mov word[test], 1 signifies, that [test] is a word; there is an information about number format encoded in push word 1.
-
-call. To see the exit code of the last process use the $? variable.
-
-> false
-> echo $?
-1
+Constant precomputation <-> computation not in RT: mov rax, label + 1 + 2*3
+String length just before the string VS null-terminated strings
+Address = base + index * scale + displacement; scale = 1, 2, 4, 8; displacement is always immediate.
+The $? variable.
