@@ -20,3 +20,6 @@ Question 16 How do you write numbers in different number systems in a way unde
 
 Question 45. Decipher this segment selector: 0x08.
 	0x08 = 0000 0000 0000 1000; T = 0 selects GDT instead of LDT; RPL = 00, it means that we are in the most priveleged level, the ring 0; Index of the descriptor in GDT = 1.
+	
+Question 46. Read about microcode in general and processor pipelines.
+	

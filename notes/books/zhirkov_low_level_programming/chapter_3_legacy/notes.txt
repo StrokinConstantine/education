@@ -2,5 +2,10 @@
 In real mode: physical address = segment base * 16 + offset ( segment:offset <-> 4a40:0002, ds:0001, 7db3:ah ).
 When the program is loaded, the loaders sets ip, cs, ss and sp.
 CPU always starts in real mode, and then the main loader usually executes the code to explicitly switch it to protected mode and then to the long mode.
+To enter protected mode one has to create GDT and set up gdtr, set a special bit in cr0 and make far jump.
 In protected mode linear address = segment base ( taken from GDT ) + offset, each segment registers stores segment selector, containing an index in descriptor table. GDTR is a register that stores GDT address and size.
+For each segment register there is shadow register, which cannot be directly referenced.
 CISC ( Complete Instruction Set Computer ), RISC ( Reduced Instruction Set Computer ) architecture.
+Writing in 8-bit or 16-bit parts leaves the rest of bits ( of rax ) intact, writing to 32-bit parts fills the upper half of a wide register with sign bit.
+In reality, rax, eax, and all others do not exist as fixed physical entities.
+By discarding upper 32 bits on each write to eax we eliminate additional dependency.
