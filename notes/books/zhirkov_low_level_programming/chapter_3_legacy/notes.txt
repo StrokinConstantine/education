@@ -1,0 +1,6 @@
+2^16 bytes = segment ( in real mode ).
+In real mode: physical address = segment base * 16 + offset ( segment:offset <-> 4a40:0002, ds:0001, 7db3:ah ).
+When the program is loaded, the loaders sets ip, cs, ss and sp.
+CPU always starts in real mode, and then the main loader usually executes the code to explicitly switch it to protected mode and then to the long mode.
+In protected mode linear address = segment base ( taken from GDT ) + offset, each segment registers stores segment selector, containing an index in descriptor table. GDTR is a register that stores GDT address and size.
+CISC ( Complete Instruction Set Computer ), RISC ( Reduced Instruction Set Computer ) architecture.

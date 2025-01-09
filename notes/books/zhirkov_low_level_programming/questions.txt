@@ -13,3 +13,10 @@ Question 14. Check that the ASCII codes mentioned in the last example are correc
 Question 15. What is the difference between sar and shr? Check Intel docs.
 
 Question 16 How do you write numbers in different number systems in a way understandable to NASM? Check NASM documentation.
+
+
+
+
+
+Question 45. Decipher this segment selector: 0x08.
+	0x08 = 0000 0000 0000 1000; T = 0 selects GDT instead of LDT; RPL = 00, it means that we are in the most priveleged level, the ring 0; Index of the descriptor in GDT = 1.
