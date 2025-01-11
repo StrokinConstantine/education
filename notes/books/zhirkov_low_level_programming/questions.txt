@@ -22,4 +22,7 @@ Question 45. Decipher this segment selector: 0x08.
 	0x08 = 0000 0000 0000 1000; T = 0 selects GDT instead of LDT; RPL = 00, it means that we are in the most priveleged level, the ring 0; Index of the descriptor in GDT = 1.
 	
 Question 46. Read about microcode in general and processor pipelines.
-	
+
+
+Question 158. What will be the value of k? Try to compile and see in your own computer.
+	The value of k will be -127.
