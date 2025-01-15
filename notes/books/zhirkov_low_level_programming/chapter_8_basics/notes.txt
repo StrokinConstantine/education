@@ -1,0 +1,8 @@
+ANSI C <-> C90 <-> C89 != GNU C
+ANSI C still remains the most pervasive standard
+-std=c89
+-pedantic-errors
+-Wall
+-Werror
+gcc -o main file1.c file2.c
+dandling else
