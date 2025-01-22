@@ -24,5 +24,13 @@ Question 45. Decipher this segment selector: 0x08.
 Question 46. Read about microcode in general and processor pipelines.
 
 
+
+
+
+
+Question 114. Draw a finite state machine to count the words in the input string. The input length is no more that eight symbols.
+	If the ASCII code of the first character equals 0, we move to the final state "zero", if not, we move to next state B. If the ASCII code of readed character in state B equals 0, we move to the final state "one", if not, we move to next state C and so on.
+
+
 Question 158. What will be the value of k? Try to compile and see in your own computer.
 	The value of k will be -127.

@@ -1,0 +1,19 @@
+Trace of execution:
+old state; rule; new state:
+A	+	B
+B	3	C
+C	5	C
+
+In finite state machines, there is no memory, no assignments, no if-then-else constructions. This is thus a completely different abstract machine comparing to the von Neumann's.
+There is only states and transitions.
+else-rule.
+This model is not Turing complete.
+egrep
+
+Regular expressions are a way to encode finite automatons.
+
+A regular expression R can be:
+	1. A letter.
+	2. A sequence of two regular expressions: R Q.
+	3. Metasymbols ^ and $, matching against the beginning and the end of the line.
+	4. A pair of grouping parenteses with a regular expression inside: (R)

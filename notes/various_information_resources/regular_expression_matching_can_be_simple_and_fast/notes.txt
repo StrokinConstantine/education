@@ -1,0 +1,8 @@
+Regular expression = notation for describing sets of character strings.
+Regular expression matches the string := the string is in the set described by a RE.
+Finite automata = state machines.
+deterministic finite automaton (DFA) <-> each input letter leads to at most one new state
+NFA = NDFA = some input letter can lead to a several new states
+unlabeled arrows.
+NFA <-> DFA <-> Regular expression
+The efficiency comes from tracking the set of reachable states but not which paths were used to reach them. In NFA with n nodes, there can only be n reachable states at any step, but there might be 2^n paths through the NFA, so with backtracking approach the time will grow exponentially.

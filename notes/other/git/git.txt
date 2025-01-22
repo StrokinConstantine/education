@@ -1,1 +1,1 @@
-unstage: git restore --staged *
+inverse of add - unstage: git restore --staged *
