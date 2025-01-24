@@ -82,7 +82,36 @@
 	
 	std::list
 	std::forward_list since C++11
-	std::deque just as std::vector, but with push_front(), pop_front(  )
+	std::deque just as std::vector ( operator[] O(1)), but with push_front(), pop_front(  )
 	
+	not containers, std::stack - adapter to deque, std::queue, std::priority_queue ( heap implemented on array, adapter to deque )
 	
+	std::map< key, value >
+	operator[](key) // if value was not exist, operator[] creates default value, O( log n ) balanced search tree (RB tree).
+	.at() // exception instead of creation default value
+	.find( key )
+	.insert( pair<Key, Value> )
+	.erase( Key )
+	
+	std::multimap // no operator[] and .at(); lower_bound(Key), upper_bound(Key)  (RB tree)
+	 
+	std::set   (RB tree)
+	
+	std::multiset  (RB tree)
+	
+	unordered_map ... unordered_multiset // hash table. insert, delete, search : O(1) in average, in worst case O(n)
+	
+	O(1) in average <-> lim (total time / number of all attempts) != const; average by input data, but we can choose input data that insert will take O(n) always, in O(1) amortized we can't do that
+	
+	std::cout << x; <-> <<( std::cout, x );
+	
+	std::istream 
+	
+	std::ostream
+	
+	std::ifstream 
+	std::ofstream
+	
+	std::istringstream ( string as stream )
+	std::ostringstream
 */
