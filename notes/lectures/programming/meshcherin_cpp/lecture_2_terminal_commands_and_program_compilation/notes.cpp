@@ -28,6 +28,34 @@ Literal suffixes:
 	0 - 1u = ?
 	
 	v.size() - 10 ?
+	
+	(double) 5; // ok
+	
+	0x10 = 16
+	010 = 8
+	0b10 = 2
+	
+	since C++14 1'000'000
+	
+	
+	
+	cd change directory
+	pwd print working directory
+	
+	TAB
+	
+	cd ../../..
+	cd -
+	pushd
+	popd
+	
+	mnemonics:
+		..
+		~
+		.
+		/
+		
+	
 */
 
 
