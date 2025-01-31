@@ -1,0 +1,10 @@
+Avoid conversions in cycles
+stdbool.h for bool
+
+
+explicit typing = we always annotate data with types
+implicit typing
+Python = strong dynamic typing ( no implicit conversions, 1 if True else "3" + 2 is ok )
+JavaScript = weak dynamic typing
+C = static weak typing ( all types are known in compile time, type checking during compile time )
+OCaml = static strong typing

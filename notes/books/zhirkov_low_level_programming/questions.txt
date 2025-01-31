@@ -34,3 +34,90 @@ Question 114. Draw a finite state machine to count the words in the input string
 
 Question 158. What will be the value of k? Try to compile and see in your own computer.
 	The value of k will be -127.
+	
+Question 159. Create sample programs to study the values of these expressions: sizeof(void), sizeof(0), sizeof('x'), sizeof("hello").
+	sizeof(void) = 1, sizeof(0) = 4, sizeof('x') = 4, sizeof("hello") = 6.
+	
+Question 160. What will be the value of x? int x = 10; size_t t = sizeof( x = 90 );
+	The value of x will be 10.
+	
+Question 161. How do you compute how many elements an array stores using sizeof?
+	We can compute array size using sizeof as follows: sizeof( array ) / sizeof ( array[0] );
+	
+Question 162. Why do these shorts seem reversed? Will it always be the case, or is it architecture dependent?
+	Because Intel 64 is following the little endian convention. It is architecture dependent.
+	
+Question 163. What is the purpose of & and * operators?
+	The * operator is used to dereference a pointer, the & operator is used to get the address of the variable.
+	
+Question 164. How do we read an integer from an address 0x12345?
+	We can read an integer from an address 0x12345 as follows: int* ptr = 0x12345; int a = *ptr;
+
+Question 165. What type does the literal 42 have?
+	Integer literals have type signed int by default.
+	
+Question 166. How do we create a literal of types unsigned long, long, and long long?
+	We can create literals for unsigned long, long and long long by adding suffixes UL, L and LL
+
+Question 167. Why do we need size_t type?
+	We need size_t for array indexes and array lenghts.
+
+Question 168. How do we convert values from one type to another?
+	We can convert one value type to another by adding the type in parentheses before the value we want to convert.
+	
+Question 169. Is there a Boolean type in C89?
+	There is no Boolean type in C89, but we can include stdbool.h for bool.
+	
+Question 170. What is a pointer type?
+	Pointer type is used to hold an address of a variable of a certain type.
+	
+Question 171. What is NULL?
+	NULL is a value for uninitialized pointers.
+	
+Question 172. What is the purpose of the void* type?
+	The purpose of void* type is that we can hold a pointer to anything in this type.
+
+Question 173. What is an array?
+	An array consists of consecutive memory cells of the same data type.
+	
+Question 174. Can any consecutive memory cells be interpreted as an array?
+	Any consecutive memory cells can be interpreted as an array.
+
+Question 175. What happens when trying to access an element outside the array’s bounds?
+	When trying to access an element outside the array's bounds the undefined behavior happens.
+	
+Question 176. What is the connection between arrays and pointers?
+	The types "T[]" and T* are the same and array variable is just a pointer to the first element of an array.
+	
+Question 177. Is it possible to declare a pointer to a function?
+	We can declare a pointer to function as follows: return_type (pointer_name) ( arg1, arg2, ... )
+	
+Question 178. How do we create an alias for a certain type?
+	We can create an alias for a certain type using typedef.
+
+Question 179. How are the arguments passed to the main function?
+	The shell is splitting whole calling string into pieces by whitespaces and the loader ensures that main gets this information
+	
+Question 180. What is the purpose of the sizeof operator?
+	sizeof operator is used to know size of something in bytes. Also it can be used to know size of statically defined array.
+	
+Question 181. Is sizeof evaluated during the program execution?
+	sizeof is evaluated in complie time.
+
+Question 182. Why is the const keyword important?
+	The const keyword gives us guarantee that variable will not be changed during an execution.
+
+Question 183. What are structure types and why do we need them?
+	Structural types is used to combine several types to create another type. We need structures for data abstraction.
+
+Question 184. What are union types? How do they differ from the structure types?
+	Union types is similar to structure types, but every field of a union start at the same address, when structure fields do not overlap and also may constain gaps between each other.
+
+Question 185. What are enumeration types? How do they differ from the structure types?
+	Enumeration types based on int type. Enumeration consists of number of named int constants.
+
+Question 186. What kinds of typing exist?
+	There are explicit/implicit typing, static/dynamic typing and strong/weak typing.
+
+Question 187. What kinds of polymorphism exist and what is the difference between them?
+	There are parametric polymorphism, overloading, inclusion and coercion.
