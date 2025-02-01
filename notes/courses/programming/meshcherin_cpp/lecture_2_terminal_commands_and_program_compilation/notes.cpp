@@ -44,25 +44,51 @@ Literal suffixes:
 	
 	TAB
 	
+	ctrl + w remove word
+	ctrl + u remove line
+
 	cd ../../..
 	cd -
 	pushd
 	popd
 	
 	mnemonics:
-		..
-		~
-		.
-		/
+		.. - parent directory
+		~ - home directory
+		. - current directory
+		/ - root directory
 		
+	ls list ( show files in current directory )
+	ls -l 
+	
+	
+	
+	drwxrwxrwx 1 root root 4096 datetime:
+		* d - file type ( d = directory, - = file, l = link )
+		* first rwx - owner rights ( for directories x means that you can open directory, for files x means loading to RAM and execution )
+		* second rwx - owner group rights
+		* third rwx - other users rights
+		* 1 - number of hard links to this file
 		
-		
-		
-		
-		
-		
-		
-		
+	cat - file to output stream
+	vim, nano - text editors
+	
+	vim:
+		i - 
+		:!q
+	.vimrc - vim configuration file
+
+	g++
+	C++ version != g++ version != stdlib version
+	
+	g++ -o b.out file.cpp
+	chmod -x a.out
+	chown
+	
+	./a.out
+	a.out - you can execute a.out like that only if you are in standard directory with binaries
+	
+	echo $PATH
 	
 */
 
