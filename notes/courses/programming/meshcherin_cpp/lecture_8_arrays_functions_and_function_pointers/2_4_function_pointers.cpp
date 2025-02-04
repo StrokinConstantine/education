@@ -15,7 +15,7 @@ void g ( int ) {}
 void g ( double ) {}
 int h ( int );
 
-void f ( int x = 0; int y = 0 ) // default arguments
+void f ( int x = 0, int y = 0 ) // default arguments
 {
 	
 }
@@ -43,4 +43,11 @@ int main()
 	
 	void (*ptr_to_function_3)(int) = &g; // okay
 	void (*ptr_to_function_4)(double) = &g; // okay
+	
+	void (*p_1[10])(int); // array of ten function pointers
+	
+	int (*p_2[10])[4]; // array of ten pointers to array
+	
+	void ( *(*pff[10])(int) )( int ); // function returns pointer to function
+	
 }

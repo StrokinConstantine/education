@@ -7,7 +7,7 @@ void f ( int* ) {}
 
 void f ( int(*)[5] ) {}
 
-void f ( int** ) {} // array of pointers = 
+void f ( int** ) {} // array of pointers = pointer to pointer
 // void f ( int*[5] ) {} // error: redefinition of ‘void f(int**)’
 
 int main()
