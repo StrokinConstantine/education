@@ -184,7 +184,7 @@ public:
 	// we can initialize constant references with rvalue, they expand lifetime of an object, but it works only for local variables of functions
 	C3(): ref_2( 54 ) {} // undefined behavior
 
-	C3& operator=(  const C3& other ) = default; // if there is constants or references in fields, compiler will not create operator=, but it is better to not use references and constants in a fields
+	C3& operator=(  const C3& other ) = default; // if there is constants or references in fields, compiler will not create operator=, but it is better to not use references and constants in a  fields
 };
 
 
