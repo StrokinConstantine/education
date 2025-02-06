@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+%\graphicspath{{img/}}
+\usepackage[russian]{babel}
+\usepackage{graphicx, float}
+
+
+\usepackage[letterpaper, top=1.3in, bottmo 1.3in, left=1.3in, right=1.3in, heightrounded]{geometry}
+
+
+\renewcommand{\baselinestretch}{1.25}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.8em}
+
+
+\title{Optimization methods}
+\author{Constantine Strokin}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Lecture 1}
+
+
+\[  
+x^* = \arg\min_{x \in D} f(x) \iff f(x^*) = \min_{x \in D}{f(x)}
+\]
+
+\[
+f'(x) := \nabla f(x)
+\]
+
+\[  
+f''(x) := H(f(x)) = \begin{bmatrix}  
+\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2} & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots & \vdots & \ddots & \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} & \frac{\partial^2 f}{\partial x_n \partial x_2} & \cdots & \frac{\partial^2 f}{\partial x_n^2}  
+\end{bmatrix}  
+\] 
+
+\[  
+f(x) = f(x_0) + f'(x_0)h + \frac{1}{2}h^Tf''(x_0)h + o(||h||^2)  
+\] 
+
+Let $f \in C^2( \mathbb{R}^n)$, then necessary condition for the extremum:
+
+\[
+f'(x^*) = 0
+\]
+
+Sufficient condition for the extremum (minimum):
+
+\[
+f'(x^*) = 0
+\]
+
+\[
+f''(x^*) > 0
+\]
+
+The last condition means that the matrix is positive-definite.
+
+\section{Lecture 2}
+
+
+\end{document}
