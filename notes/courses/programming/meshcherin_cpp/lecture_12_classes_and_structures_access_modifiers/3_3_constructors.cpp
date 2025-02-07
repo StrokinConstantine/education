@@ -11,19 +11,20 @@
 	the function of three: if class has a non-trivial copy constructor, or non-trivial desctructor, or non-trivial operator=, you must define all of this
 */
 
-#include <iostream>
-#include <vector>
-#include <cstring>
-#include <algorithm>
+#include<iostream>
+#include<vector>
+#include<cstring>
+#include<algorithm>
 
 class ComplexNumber
 {
+	char arr[10]; // array in stack
 	double re = 0.0;
 	double im = 0.0;
 	
 public:
 	
-	ComplexNumber( double real )
+	ComplexNumber(double real)
 	{
 		// fields are already initialized here
 		re = real; // firstly we initialize re with 0 ( default constructor call ) , then we assign real to re
@@ -139,6 +140,49 @@ public:
 		std::swap(capacity, other.capacity); // O(1)
 	}
 	
+	char& operator[](size_t index)
+	{
+		return arr[index];
+	}
+	
+	const char& operator[](size_t index) const // now we cannot change constant strings with operator[]
+	{
+		return arr[index];
+	}
+	
+	
+	
+	/*
+	
+	char& operator[](size_t index) const // now we cannot change constant strings with operator[]
+	{
+		return arr[index];
+	}
+	
+	there is no compile time error, but it is bad
+	
+	
+	When we are in const method, char* arr become char* const arr, so arr[i] became char&, so this method will be compiled without errors
+	
+	
+	
+	
+	
+	char operator[](size_t index) const
+	{
+		return arr[index];
+	}
+	
+	this method is bad, because &(s[0]) will not work properly
+	also:
+	String s = "abcd";
+	const String& cs = s;
+	const char& c = cs[0];
+	s[0] = 'b';
+	now c should be equal to 'b', but it is equal to 'a'
+	
+	*/
+	
 	// return String -> copy constructor
 	
 };
@@ -179,10 +223,10 @@ class C3
 {
 public:
 
-	 const int& ref_2;
+	// const int& ref_2;
 	
 	// we can initialize constant references with rvalue, they expand lifetime of an object, but it works only for local variables of functions
-	C3(): ref_2( 54 ) {} // undefined behavior
+	// C3(): ref_2( 54 ) {} // undefined behavior
 
 	C3& operator=(  const C3& other ) = default; // if there is constants or references in fields, compiler will not create operator=, but it is better to not use references and constants in a  fields
 };
@@ -259,6 +303,16 @@ public:
 int main()
 {
 	
+	
+	
+	String sss = {'a', 'b', 'c', 'd'};
+	const String& cs = sss;
+	const char& cc = cs[0];
+	// there is also should be two versions for cs.front() and cs.back() for const and non-const strings
+	sss[0] = 'b';
+	
+	std::cout << cc << " " << sss[0] << std::endl;
+	
 	class C3 my_c3_1;
 	class C3 my_c3_2;
 	
@@ -275,7 +329,7 @@ int main()
 	C3 c34;
 	
 	class C6 c66( 2 );
-	std::cout << c34.ref_2;
+	// std::cout << c34.ref_2;
 	
 	String s11 = {'d', 'd'};
 	String s22 = s11; // if you do not create copy constructor it is undefined behavior
