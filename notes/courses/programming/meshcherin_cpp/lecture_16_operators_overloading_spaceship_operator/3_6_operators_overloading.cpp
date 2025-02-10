@@ -9,7 +9,7 @@ struct Complex
 	double re = 0.0;
 	double im = 0.0;
 
-	Complex( double re ) : re(re) {}
+	Complex( double re_arg ) : re(re_arg) {}
 	Complex( double re, double im ) : re( re ), im( im ) {}
 
 /*
@@ -29,10 +29,46 @@ struct Complex
 		return *this;
 	}
 	
-	// operator spaceship ( since C++20 )
-	// Three-way comparison
-	// auto operator<=>( const Complex& other ) = default;
-	auto operator<=>( const Complex& other ) = default;
+    // three-way comparison C++20
+    /*
+        if we want to compare different types ( char* and string without conversion char*->string)
+        -> we need do define every operator (<, > , <=, ...) for every possible pair of different arguments
+        operator spaceship works as following:
+        we need to define operator<
+        a > b;
+        if operator> defined, then call it
+        else if operator<=> defined, then 'call it'
+        operator<=> is fast ( for example if we are comparing strings)
+        <=> returns {greater, lower, equal}
+        
+        predicate= is equivalence realtion + 4) for any function f: a = b -> f(a) = f(b) 
+        
+        std::strong_ordering // equal means that object are identical 
+        std::weak_ordering there is no forth property of predicate= -> it can return "EQUAL", even if obects are different, 
+        std::partial_ordering
+        
+        string has weak_ordering because capacity can be different
+
+        std::weak_ordering is the same as weak ordering in math, but when object are not comparable in math, then are equal in std::weak_ordering
+    
+		if you defines operator<=> non-default, then operators <, >, <=, >= defines by the compiler, but operators == and != are not
+		because ( for strings ) we can firstly compare sizes and then compares strings ( so != and == would be not efficient if they would implemented through < )
+	*/
+	
+    std::weak_ordering operator<=>( const Complex& other) const = default; // all comparison operators will be defined lexicographically 
+	
+	
+	bool operator==(const Complex& other) const = default; // comparison of fields
+	    
+    std::weak_ordering operator<=>(const char* other) const
+    {
+        return std::weak_ordering::equivalent;
+        // now you can compare string and char*, char* and string with any comparison operator
+
+    }
+    
+	
+	
 	
 	Complex& operator=( const Complex& other ) & // applied only to lvalue, since C++11
 	{
@@ -107,11 +143,6 @@ bool operator>=( const Complex& a, const Complex& b)
 	return !(a < b);
 	// return !( a < b || a == b )
 }
-bool operator>=( const Complex& a, const Complex& b)
-{
-	return a.re == b.re || a.im == b.im;
-	// return !( a < b || a == b )
-}
 
 // == <-> a <= b && a => b
 
@@ -121,8 +152,44 @@ bool operator>=( const Complex& a, const Complex& b)
 
 // you can't change priority of operators, you can't create your own symbol for operators, you can't change order of evaluation of operators
 
+
+struct UserId
+{
+	int value = 0;
+	
+	UserId& operator++() // it is preferable to use prefix increment, it is faster
+	{
+		++value;
+		return *this;
+	}
+	
+	// for BigInteger prefix ++ should be O(1) amortized ( if we call a lot of ++, there is will be very small amount of reallocations )
+	
+	UserId operator++(int) // we have to accept fake int argument
+	{
+		UserId copy = *this; // always O(n) for BigInteger
+		++value;
+		return copy;
+	}
+}
+
+struct greater // functional class, functor ( not in math )
+{
+	bool operator()(int x, int y) const
+	{
+		return x > y;
+	}
+}
+
+
 int main()
 {
+	std::vector<int> v(30);
+	
+	std::sort(v.begin(), v.end(), greater() ); // greater() is a functional object
+	// functinonal objects can use fields
+	// syntactically there is no difference between function and object witl operator()
+	
 	Complex c(1.0);
 	
 	c + 3.1; // c.operator+(3.1);
@@ -131,10 +198,14 @@ int main()
 	Complex a(1);
 	Complex b(1);
 	
-	a + b = c; // a + b is rvalue, but it is your custom type, so it is okay to assign to rvalue
+	// a + b = c; // a + b is rvalue, but it is your custom type, so it is okay to assign to rvalue
 	// by default all methods can be applied to rvalue and lvalue ( operator= also )
  	// first solution: const Complex operator+ ( only before C++11 )
 	// second solution: 
 
 	
 }
+
+
+
+     
