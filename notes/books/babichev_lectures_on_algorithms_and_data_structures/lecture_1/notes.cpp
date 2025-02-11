@@ -1,3 +1,5 @@
+#include <iostream>
+
 /*
 	algorithm efficiency := ability of the algorithm to use limited amount of resources
 	for algorithms without loops descriptive compexity roughly correlates with computational complexity
@@ -37,5 +39,32 @@ public:
 
 class array
 {  
+public:
+	// virtual array create_array() const = 0;
+	// virtual void delete_array() const = 0;
+	virtual int32_t get( size_t ) const = 0;
+};
+
+class stack
+{  
+public:
+	virtual stack create_stack() const = 0;
+	virtual stack create_stack( size_t max_size ) const = 0;
+	virtual void delete_stack() const = 0;
 	
-}
+	virtual bool push( int32_t );
+	virtual int32_t pop(); // here we should return struct maybe_int32_t
+	virtual int32_t peek()const = 0;
+	
+	virtual bool empty() const = 0;
+};
+
+class set // elements of the set must be comparable by ==
+{
+public:
+
+	virtual bool insert( int32_t ) = 0;
+	virtual bool remove( int32_t ) = 0;
+	virtual bool in( int32_t ) const = 0; // is set constains element
+	virtual size_t size() const = 0 ;
+};
