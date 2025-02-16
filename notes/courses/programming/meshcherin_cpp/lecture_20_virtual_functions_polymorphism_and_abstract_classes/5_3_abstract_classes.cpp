@@ -15,8 +15,13 @@ struct Shape // class is abstract, since it has at least one pure virtual method
 	virtual ~Shape() = default; // can be pure virtual
 };
 
-
-double Shape::perimeter() const { return 0.0; } // we can define pure virtual function, but we still cannot create objects of abstract class Shape
+// we can define pure virtual function, but we still cannot create objects of abstract class Shape
+double Shape::perimeter() const
+{
+	// we can call it using qualified-id
+	// here we can be fallback, or error message
+	return 0.0;
+} 
 
 
 
