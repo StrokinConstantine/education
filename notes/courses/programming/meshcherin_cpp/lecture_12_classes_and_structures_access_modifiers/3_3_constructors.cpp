@@ -329,6 +329,9 @@ int main()
 	C3 c34;
 	
 	class C6 c66( 2 );
+	
+	int x{5}; // initialization
+	
 	// std::cout << c34.ref_2;
 	
 	String s11 = {'d', 'd'};
