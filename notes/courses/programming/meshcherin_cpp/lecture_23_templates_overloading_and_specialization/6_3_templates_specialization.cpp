@@ -6,17 +6,15 @@
 
 
 
-
-
-
-
 template <typename T>
 class vector
 {
 	T* arr;
 };
 
-// full specialization <>
+
+
+// full specialization (for classes) <>
 template <>
 class vector<bool>
 {
@@ -26,14 +24,10 @@ class vector<bool>
 
 
 
-
-
-
-
 template <typename T, typename U>
 struct S{ S(){ std::cout << "T, U" << std::endl; } };
 
-// partial specialization
+// partial specialization (for classes)
 template <typename W> // for every W if T == U
 struct S<W, W> { S(){ std::cout << "W, W" << std::endl; } }; // meta-signature that is specific type of template <typename T, typename U>
 
@@ -59,8 +53,96 @@ struct SS< const T> { SS(){ std::cout << "const T" << std::endl; } };
 template <typename T>
 struct SS< T*> { SS(){ std::cout << "T*" << std::endl; } };
 
+
+
+
+
+
+
+// functions
+
+/*
+	function overloading != template funcitons specialization
+
+*/
+
+// for functions specialization := template <> ...
+// for functions there in no partial specialization
+
+template <typename T, typename U>
+void f(T, U)
+{
+	std::cout << "f T U" << std::endl;
+}
+
+template<typename T>
+void g(T, T, T)
+{
+	std::cout << "g T T T" << std::endl;
+}
+
+template <> // specialization for f(T, U)
+void f(int, int)
+{
+	std::cout << "f int int" << std::endl;
+}
+
+template <typename T>
+void f(T, T)
+{
+	std::cout << "f T T" << std::endl;
+}
+
+template <> // specialization for f(T, T)
+void f(int, int)
+{
+	std::cout << "f int int" << std::endl;
+}
+
+
+
+
+// 3 overloaded candidates ( template version 1, template version 2 ( with specialization ), non-template version 3 )
+// firstly compiler resolutes overloading -> specialization resolution ( maybe )
+
+template <typename T, typename U>
+void h(T, U)
+{
+	std::cout << "h T U" << std::endl;
+}
+template <typename T>
+void h(T, T)
+{
+	std::cout << "h T T" << std::endl;
+}
+template <> // specialization for h(T, T) (closer from top)
+void h(int, int) // but if it would h(int, double), it would be specialization for h(T, U)
+{
+	std::cout << "h int int" << std::endl;
+}
+
+void h(int, int)
+{
+	std::cout << "non-template h int int" << std::endl;
+}
+
+
+
+
+
+
+
 int main()
 {
+	h( 1.0, 1.0 );
+	h( 1.0, 1.0f );
+	
+	
+	
+	
+	 
+	f(1, 1); // depends on declaration order ( not exactly )
+
 	int x = 0;
 	// more specific specialization is most preferred 
 	S<float, double> a1;
