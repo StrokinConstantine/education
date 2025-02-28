@@ -17,13 +17,24 @@
 	t = x > 0 is faster that if ( x > 0 ) t = 1; else t = 0;
 	if the value of the function f on the sequence x1, ..., xn can be restored from its value on the sequence x1, ..., xn-1 and the element xn, then function f is called inductive
 	max(a1, ..., an) is inductive, because max(a1, ..., an) = max( max(a1, ..., an-1), an )
-	invariant = constant predicate
+	invariant := predicate that preserves its value
 	invariants play a crucial role in proving the correctness of algorithms
+	
+	
+	
 	automaton := a set of pairs consisting of states and transitions, there is an initial state and final state
 	a finite automaton has finite sets of states and transitions
 	the input of the automaton is the events that trigger transitions
 	a deterministic finite automaton is a finite automaton in which the same sequence of input data leads to the same final state from the same initial state
 	functional abstraction := is the separation of functions and methods from thier implementation
+	
+	All computer arithmetic is based on the consistency of the equivalence relation named mod with the operations of +, -, *, / ( computers use 2^8, ... 2^64 as m ( in mod m ) ) 
+	uint32_t * uint32_t = uint32_t mod 2^32
+	
+	inductive function := function of arguments x_1, ..., x_n that can be restored from f( x_1, ..., x_(n-1) ) and x_n
+	
+	functions 'max', 'min', 'sum' are inductive functions
+	
 	
 */
 
@@ -68,3 +79,16 @@ public:
 	virtual bool in( int32_t ) const = 0; // is set constains element
 	virtual size_t size() const = 0 ;
 };
+
+int main()
+{
+	/*
+		what is the last digit of 3^(7^8)?
+		3^1 mod 10 = 3, 3^2 mod 10 = 9, 3^3 mod 10 = 7, 3^4 mod 10 = 1, 3^5 mod 10 = 3, ...
+		(7^8) mod 4 = 3^8 mod 4 = ( ...3, ...1, ...3, ... ) = 1
+		3^(7^8) mod 10 = 3
+	*/
+	
+	return 0;
+}
+
