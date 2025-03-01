@@ -22,6 +22,3 @@ uint64_t fibonacci_upgrade_1( uint64_t n ) // O(n) memory and O( phi^n ) time
 	return fibonacci( n - 2lu ) + fibonacci( n - 1lu );
 }
 
-//Any executor of an algorithm deals not with numbers, but with their representations
-
-// + is usually faster than *, / and %  are usually very slow 

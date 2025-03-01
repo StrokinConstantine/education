@@ -34,6 +34,13 @@
 	inductive function := function of arguments x_1, ..., x_n that can be restored from f( x_1, ..., x_(n-1) ) and x_n
 	
 	functions 'max', 'min', 'sum' are inductive functions
+	Any executor of an algorithm deals not with numbers, but with their representations
+
+	+ is usually faster than *, / and %  are usually very slow 
+	(n) - numbers := numbers that need at least n basic types for representation ( if basic type is int32_t, then numbers of type int64_t is (2) - nubmers )
+	
+	addition of (n) - numbers algorithm = school method of addition ( in columns ) with complexity O(n)
+	
 	
 	
 */
