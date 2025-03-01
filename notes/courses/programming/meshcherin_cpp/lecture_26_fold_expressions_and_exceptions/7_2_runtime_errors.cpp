@@ -4,10 +4,10 @@
 	low level errors ( OS level errors ):
 		segmentation fault ( C++ level reasons: stack overflow, array out of bounds, nullptr dereference )
 		floating point exception ( C++ level reasons: division by 0 )
-		aborted ( C++ level reasons: std:abort() reason: std::terminate() reasons: uncaught exception, pure virtual function call )
+		aborted ( C++ level reasons: std:abort() reasons: false assertion, std::terminate() reasons: C++ uncaught exception, pure virtual function call )
 		ctrl + C
 		ctrl + D
-		illegal instruction
+		illegal instruction ( no "return" keyword in function )
 
 */
 
