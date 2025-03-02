@@ -60,7 +60,7 @@ int main()
 	{
 		//std::cout << "i:" << text[i] << std::endl;
 		
-		std::cout << toString(current_state) <<  " " <<text[i] << std::endl;
+		std::cout << toString(current_state) <<  " " <<static_cast<int>(text[i]) <<  " " << text[i] << std::endl;
 		
 	
 		
