@@ -49,4 +49,33 @@ int main()
 	{
 		std::cout << "caught" << &a << std::endl;
 	}
+	
+	
+	
+	
+	
+	
+	try
+	{
+		f( 0 );
+	} catch ( A a ) // copying dynamic 'a' to stack
+	{
+		std::cout << "caught" << &a << std::endl;
+		// here dynamic "a" will be destroyed
+		// __cxa_free_exception
+		
+		// throw; // throw; in catch means to continue throwing 
+		throw a; // destroy old 'a', create new 'a'
+	} catch ( A a )
+	{
+		
+	}
+	
+	} catch ( A a )
+	{
+		std::cout << "caught" << &a << std::endl;
+	}
+	
+	
+	
 }
