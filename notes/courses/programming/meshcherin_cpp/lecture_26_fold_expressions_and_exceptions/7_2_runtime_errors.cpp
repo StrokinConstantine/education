@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 /*
 	low level errors ( OS level errors ):
 		segmentation fault ( C++ level reasons: stack overflow, array out of bounds, nullptr dereference )
@@ -13,6 +13,24 @@
 
 int main()
 {
+	
+	std::vector<int> v;
+	
+	// Python always checks ( with ifs ) your actions, you can not access memory directly
+	// 2 / 0 - ( Python interpreter level exception )
+	// Floation point exception (core dumped) - message from OS
+	
+	try
+	{
+		v[100'000'000] = 1; // undefined behavior
+		
+	} catch ( ... ) // it is not ... in C functions, and it is not ... in fold expressions
+	{
+		
+	}
+
+	// future and promise in C++
+	
 	try
 	{
 		int a;
@@ -28,6 +46,8 @@ int main()
 	{
 		std::cout << "caught" << std::endl;
 	}
+	
+	// in std::exception what() is virtual and destructor is virtual 
 	
 	return 0;
 }
