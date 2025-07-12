@@ -31,8 +31,9 @@ struct S
     A a;
     S(int x) { std::cout << "S ctor: " << this << std::endl;
         if (x == 0)
-            throw 1;  // s dtor will not be called
+            throw 1;  // s dtor will not be called, because s is not created yet
             // therefore we should wrap field "a" with raii, to correctly destroy a. Destructors of fields will be called, but destructor of S will not
+			
         
     }
     S(const S& s) { std::cout << "S copy ctor: " << this << std::endl; }
@@ -72,11 +73,13 @@ struct R
     B a1;
     B* a;
     B a2;
-    // try for initializer list: function try block
+    // try for initializer list: function-try block
     R(int x) try: a1(2), a(new B(x)), a2(x)
     // exception thrown in initializer list
     // a1 is created, a2 is not
     // dtor of a1 will be called and dtor of a2 is not
+	
+	// вызовутся деструкторы у полей которые успеют создаться
     
     {
         std::cout << "R ctor: " << this << std::endl;
@@ -84,7 +87,8 @@ struct R
     {
         std::cout << "caught in init list" << std::endl;
         // for ctors: automatically throw;
-        // implicit throw;
+        // implicit throw in the end
+		// you cannot return earlier
     }
     
     ~R()
@@ -100,10 +104,20 @@ void throw_exception()
 }
 
 
+void f() try { // function-try block
+	
+	
+} catch( ... )
+{
+	
+}
+
 
 struct C
 {
-    ~C() noexcept(false) // now we can throw exceptions from here
+	// since C++11 you can't throw exceptions from destructor ( std::terminate )
+	
+    ~C() noexcept(false) // but now we can throw exceptions from here
     {
 std::cout << std::uncaught_exceptions() << std::endl;
         try
@@ -111,6 +125,9 @@ std::cout << std::uncaught_exceptions() << std::endl;
             throw_exception();
         } catch( long a)
         {
+			
+			// if exception is thrown from destructor because of another exception ( until C++11 ) -> std::terminate
+			
             std::cout <<"E#"<< std::endl;
         }
         
@@ -135,12 +152,19 @@ void throw_multiple_exceptions()
 int main()
 {
     
-    
+    // R r(0); What is the state of this object?
+	
     std::cout << std::uncaught_exceptions() << std::endl;
     
+	// std::uncaught_exception() - implemented by compiler ( returns true/false )
+	
+	//since C++17: std::uncaught_exceptions() ( because there is situations when there are several exceptions ) 
+	
+	// when we have try in dtor and we call f() which throws an exception ( catch also inside of  dtor ) -> we have 2 exceptions in runtime
+	
     try
     {
-        S s(0); 
+        S s(0);  
     } catch(...)
     {
         

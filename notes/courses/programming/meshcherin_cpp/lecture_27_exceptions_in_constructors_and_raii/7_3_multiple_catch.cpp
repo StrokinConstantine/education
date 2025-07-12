@@ -71,13 +71,13 @@ int main() {
     try
     {
         B b;
-        throw b; // A
+        throw b; // A, because it is first case (from top to the bottom) that came up 
     } catch(A a)
     {
      std::cout << "A";   
-    } catch(B b)
+    } catch(B b) // warning: exception of type ‘B’ will be caught by earlier handler [-Wexceptions]
     {
-     std::cout << "B";   
+     std::cout << "B";    // never be called
     } catch(...)
     {
      std::cout << "other";   
@@ -135,7 +135,7 @@ int main() {
     try
     {
         D d;
-        throw d; // now in will be D, because main does not know that d is child of C
+        throw d; // now it will be D, because main does not know that d is child of C
     } catch(C a)
     {
      std::cout << "C";   
@@ -152,7 +152,7 @@ int main() {
     try
     {
         H h;
-        throw h; // G, if inheritance is virtual, it will be E
+        throw h; // G "private inheritance" will not chage anything, bu if inheritance is virtual, it will be E (virtual F, virtual G)
     } catch(E e)
     {
      std::cout << "E";   
