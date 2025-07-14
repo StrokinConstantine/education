@@ -1,16 +1,45 @@
-/*
-	constructor ctor/dtor destructor
-	destructors are called just before lifefime of variable ends ( scope of variable ends )
-	if class has a trivial destructor, omit its definition
-	lifefime of an object / scope of variable
-	for global variable constructor is called before main(), and destructor is called after main()
-	in C++ there is no garbage collector, so we know deterministically when destructors are called ( when scope of variable ends ), in Java we do not know when object will be destroyed 
-	default destructor calls destructor of every field in reverse order
-	compiler generates copy constructor by default, even if you have another constructors
-	privateness is checking after overloading
-	the function of three: if class has a non-trivial copy constructor, or non-trivial desctructor, or non-trivial operator=, you must define all of this
-*/
 
+
+
+/*
+ * Object Lifetime and Constructors/Destructors:
+ * --------------------------------------------
+ * - Constructor (ctor) initializes objects, destructor (dtor) cleans them up
+ * - Destructors are called exactly when variable's scope ends
+ * - For global variables:
+ *   - Constructor runs before main()
+ *   - Destructor runs after main()
+ *
+ * Key Differences from Managed Languages:
+ * --------------------------------------
+ * - C++ has no garbage collector
+ * - Object destruction is deterministic (when scope ends)
+ * - Unlike Java where destruction timing is unpredictable
+ *
+ * Compiler-Generated Functions:
+ * ----------------------------
+ * - Default destructor:
+ *   - Calls destructors for all members (in reverse declaration order)
+ *   - Can be omitted if trivial (does nothing)
+ * - Default copy constructor:
+ *   - Generated even if other constructors exist
+ *   - Performs member-wise copy
+ *
+ * The Rule of Three:
+ * -----------------
+ * If a class requires any of these:
+ * 1. Non-trivial copy constructor OR
+ * 2. Non-trivial destructor OR
+ * 3. Non-trivial copy assignment operator
+ * Then it likely needs all three defined explicitly
+ *
+ * Access Control Notes:
+ * --------------------
+ * - Privacy checks happen after overload resolution
+ * - Method accessibility is verified after selecting which function to call
+ */
+ 
+ 
 #include<iostream>
 #include<vector>
 #include<cstring>

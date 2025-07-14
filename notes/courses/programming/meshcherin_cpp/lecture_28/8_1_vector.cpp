@@ -1,6 +1,7 @@
 #include <iostream>
+#include <vector>
 
-
+// 8_containers
 
 
 
@@ -10,7 +11,7 @@ class strange
 	int& r; // std::string has one
 	int x;
 	
-	Strange( int y ) : x(y), r( x ) {} 
+	strange( int y ) : x(y), r( x ) {} 
 };
 
 
@@ -43,7 +44,7 @@ class vector
 		
 
 		// new can thron an exception ( std::bad_alloc ), but we can do nothing here, because we will corrupt nothing
-		for (  ; i < size; ++i )
+		for (  ; i < sz; ++i )
 		{
 			// new_arr[i] = arr[i]; // UB, there is no T elements under new_arr pointer 
 			// An object must be constructed (e.g., via new, placement new, or automatic initialization) before any operation 
@@ -112,21 +113,65 @@ struct S
 
 
 template<>
-class vector<bool> // analogue of Cantor function in math? It breaks a lot of rules
+class vector<bool> // analogue of Cantor function in math? It breaks a lot of rules?
 {
 	char* arr;
 	size_t sz;
 	size_t cap;
 	
+	
+	
+	struct bit_reference
+	{
+		char* cell;
+		uint8_t bit_index_in_cell;
+		
+		bit_reference( char* cell, uint8_t index ) : cell(cell), bit_index_in_cell(index) {}
+		
+		//void operator=( bool b )
+		bit_reference operator=( bool b )
+		{
+			if (b)
+				*cell |= ( 1 << bit_index_in_cell );
+			else
+				*cell &= ~( 1 << bit_index_in_cell );
+			// bool assignment to the bit_reference changes the bit
+			
+			return *this;  // Returns a copy, not the original! (yes?)
+		}
+		
+		operator bool() const // operator of implicit cast to bool
+		{
+			return *cell & ( 1 << index );
+		}
+	};
+	
 public:
 	
+	bit_reference operator[]( size_t i ) // Returns copy
+	{
+		return bit_reference{ arr + i / 8, i % 8 };
+	}
 	
-	
+};
+
+template <typename T>
+class debug
+{
+	debug(T) = delete;
 };
 
 
 int main()
 {
+	
+	std::vector<bool> v(10);
+	
+	v[5] = true; // v[5] - rvalue, so we assign to rvalue here
+
+	
+	debug d(v[5]); // To know the type of v[5]
+	// T = std::_Bit_reference
 	
 	size_t a = 1;
 	

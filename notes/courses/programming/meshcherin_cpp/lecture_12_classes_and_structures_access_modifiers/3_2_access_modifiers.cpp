@@ -23,7 +23,7 @@ private:
 	}
 	
 	friend class D;
-	friend struct   F;
+	friend struct F;
 	
 };
 
