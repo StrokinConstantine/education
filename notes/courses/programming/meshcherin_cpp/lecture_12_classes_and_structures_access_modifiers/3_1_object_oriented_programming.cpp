@@ -28,28 +28,6 @@
 #include <iostream>
 #include <cstdint>
 
-struct obj
-{
-	void print()
-	{
-		std::cout << "obj::print()" << std::endl;
-	}
-};
-
-struct smart_ptr_to_obj
-{
-    obj* ptr;
-
-    smart_ptr_to_obj( obj* p ) : ptr(p) {}
-	~smart_ptr_to_obj() { delete ptr; }
-	
-	obj* operator->()
-	{
-		return ptr;
-	}
-};
-
-
 
 
 class using_in_class_example;
@@ -176,6 +154,7 @@ int main( void )
 	[[maybe_unused]] struct local_structure loc_struct_part{ 8 };       // Partial initialization (y will be 2.0)
   
 	
+	
 	[[maybe_unused]] struct alignment_in_class_example::inner_class_declaration some_var;
   
     // Structure size and alignment demonstration
@@ -210,17 +189,13 @@ int main( void )
     Demo* d_ptr = &d;
 
     // Example 1: . has higher precedence than *
-    int_least16_t n1 = *d.ptr;   // Equivalent to *(d.ptr), NOT (*d).ptr
+    int_least16_t n1 = *d.ptr;   // Equivalent to *(d.ptr), not (*d).ptr
     std::cout << "n1: " << n1 << ".\n";  // Output: 42
 
     // Example 2: -> has higher precedence than &
-    int_least16_t* n2 = &d_ptr->x;  // Equivalent to &(d_ptr->x), NOT (&d_ptr)->x
+    int_least16_t* n2 = &d_ptr->x;  // Equivalent to &(d_ptr->x), not (&d_ptr)->x
     std::cout << "n2: " << *n2 << ".\n";  // Output: 42
 	
 	
-	smart_ptr_to_obj sp( new obj );
-	
-	sp->print(); // Is interpreted as ( sp.operator->() )->print()
-	( sp.operator->() )->print();
 	return 0;
 }

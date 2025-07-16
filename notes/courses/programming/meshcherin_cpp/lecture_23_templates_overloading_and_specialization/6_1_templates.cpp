@@ -8,9 +8,6 @@
 // template <class T> the same as template <typename T>
 
 template <typename T> // quantifier ( for every type T ), meta-parameter
-
-
-
 void swap( T& x, T& y ) // O( 3*n ) for strings
 {
 	T t = x;

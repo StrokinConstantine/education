@@ -12,8 +12,6 @@ class vector
 	T* arr;
 };
 
-
-
 // full specialization (for classes) <>
 template <>
 class vector<bool>
