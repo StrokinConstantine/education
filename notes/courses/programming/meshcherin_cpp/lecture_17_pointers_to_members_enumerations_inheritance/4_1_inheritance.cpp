@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-// The friend relation is neither transitive nor symmetric. In the oriented graph representing friend relations, the number of edges is equal to the number of occurrences of the word 'friend' in the code
+// In the oriented graph representing friend relations, the number of edges is equal to the number of occurrences of the word 'friend' in the code
 
 struct a
 {

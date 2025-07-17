@@ -8,6 +8,7 @@
 	using x::f ( there is can be a lot of functions with name f ), so using x::f < void f( int ){  }
 
 */
+
 class x
 {
 public:
@@ -32,7 +33,7 @@ private:
 
 	// using x::a; // we made x::a private
 	
-	// x::a; // expression in class definition = compile time error
+	// x::a; // expression in class definition = compile time error?
 	
 public:
 

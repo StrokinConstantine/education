@@ -1,7 +1,6 @@
 #include <iostream>
 
 
-// since C++11 you can define custom literal suffixes
 
 struct C1
 {
@@ -16,7 +15,6 @@ struct C1
 	
 	/*
 		you cannot change fields in const methods ( call non-const methods of fields )
-	
 	*/
 	
 	void f2() const // const after signature
@@ -36,32 +34,7 @@ struct C1
 };
 
 
-struct C2
-{
-	// find methods changes splay tree structure, so we should label fields of tree as mutalbe  ( mutable is needed when object is constant from user point of view, but in reality object changes inner structure )
-	
-	static int X; // x will be in static memory ( there is two types of static memory, one variables initialized before start of the program ( they are located in binary file ) and other during the program ( for them compiler will write sum of their sizes in binary and in start of execution memory for them will be allocated in data )  )
-	
-	// static int y = 3; // error: ISO C++ forbids in-class initialization of non-const static member ‘C2::y’
-	// static int yy; // not definition
-	
-	static const int yyy = 5; // okay
-	
-	mutable int x = 2; // anti const, means x will not be const
-	int& ref = x;
-	
-	void f1( int y ) const // now compiler should make all fields const, but there is a reference ( = pointer ) -> const does not mean anything for reference 
-	{
-		++ref; 
-		ref = y;
-	}
-	
-	static void f2() // cannot be const, f2 will be in text
-	{
-		std::cout << "abc" << std::endl;
-	}
-	
-};
+
 
 class singleton
 {
@@ -81,23 +54,24 @@ public:
 
 singleton* singleton::ptr = nullptr; // we can't initialize static non-const fields of a class
 
-// declarations in .h, definitions in .cpp
+
 
 // extern to only declare variable
 
-int C2::X = 2; // definition of static variables is made in cpp
 
+
+
+
+
+// since C++11 you can define custom literal suffixes
 
 struct Latitude
 {
 	double value;
 	Latitude ( double value ) : value ( value ) {} // now compiler can implicitly convert double to Latitude
-	
-	
-	
 };
 
-// unsigned long long, const char*, long double as arguments
+// unsigned long long, const char*, long double as arguments ( is that only options? )
 
 Latitude operator"" _l( unsigned long long x )
 {
@@ -121,9 +95,7 @@ struct Longitude
 	}
 	
 	/*
-	
 	this is awful:
-	
 	explicit operator double&()
 	{
 		return this->value;
@@ -178,12 +150,8 @@ int main()
 	
 	c12c.f3();
 	
-	const C2 c22 = C2();
-	C2 c33 = C2();
-	
-	c22.f1( 2 );  // more likely undefined behavior, because x is const 
 
-	C2::f2();
+	
 	
 	// -fsanitize=address,undefined,leak
 	

@@ -1,7 +1,7 @@
 #include <iostream>
 
 /*
-	virtual function: function that works like inheritor version
+	virtual function: function that works like inheritor version ( when you call virtual function, you do not just go to it's address it the .text section, firstly you go to vtable of this class and then )
 	you can redeclare any function
 */
 
@@ -71,7 +71,7 @@ struct E : C
 	{
 		// final forbids inheritors to override f
 		// final can add efficiency ( optimization )
-		// final == override final ( write only override or final )
+		// final == override final ( write only one word from override | final  | virtual )
 		// write only virtual < override < final
 	}
 };
