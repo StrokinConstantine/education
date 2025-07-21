@@ -29,7 +29,7 @@ matrix<M, N, field > operator*( const matrix<M, K, field>& a, const matrix<K, N,
 
 
 // template tempate parameters ( template parameters that are templates itself )
-// std::stack dispatches methods to inner vector ( or deque )
+// std::stack dispatches methods to inner vector ( or deque )( is that related to our topic? )
 
 template < typename T, template<typename, typename> /*template tempate parameter*/  class container = std::vector > // here until c++17 you must wirte "class" ( typename since C++17 )
 class stack

@@ -7,7 +7,7 @@ struct A
 {
 	// T x; // error: ‘A<T>::x’ has incomplete type
 	
-	T* y; // we only need declaration to make a pointer
+//	T* y; // we only need declaration to make a pointer
 	
 	// T& z; // error: uninitialized reference member in ‘struct A<B>’
 	
@@ -16,10 +16,11 @@ struct A
 		static_cast<T*>(this)->implementation();
 	}
 	
-	static void static_func()
+
+/*	static void static_func()
 	{
 		T::static_sub_func();
-	}
+	}*/
 };
 
 struct B : A<B>
@@ -29,7 +30,7 @@ struct B : A<B>
 		std::cout << "B::implementation" << std::endl;
 	}
 
-	static void static_sub_func();
+	//static void static_sub_func();
 };
 
 template <typename T>
@@ -42,10 +43,21 @@ int main()
 {
 	
 	B b;
+	std::cout << &b << std::endl;
+	
+//	std::cout << b.y << std::endl;
+	
 	
 	b.implementation();
+	b.interface();
 	
 	A<B> a;
+	
+	std::cout << &a << std::endl;
+	
+//	std::cout << a.y << std::endl;
+	
+	
 	
 	a.interface();
 	

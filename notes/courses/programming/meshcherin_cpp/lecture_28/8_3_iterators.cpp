@@ -3,20 +3,66 @@
 #include <set>
 #include <iterator>
 
+
+
+/*
+ * Iterator Categories Hierarchy:
+ * 
+ * 1. Input Iterator (minimal)
+ *    - Supports: *, ++, == (may be single-pass)
+ *    - Examples: istream_iterator, single-pass algorithms
+ *    - Key limitation: Can't revisit elements
+ * 
+ * 2. Forward Iterator
+ *    = Input Iterator + multi-pass guarantee
+ *    - Examples: forward_list, unordered containers
+ *    - Can traverse same sequence multiple times
+ * 
+ * 3. Bidirectional Iterator
+ *    = Forward Iterator + --
+ *    - Examples: list, set/map
+ *    - Can traverse backwards
+ * 
+ * 4. Random Access Iterator
+ *    = Bidirectional Iterator + full arithmetic
+ *    - Supports: +, -, +=, -=, <, >, <=, >=
+ *    - Examples: vector, deque, array
+ *    - Note: deque is random access but not contiguous
+ * 
+ * 5. Contiguous Iterator (C++17)
+ *    = Random Access + memory adjacency
+ *    - Guarantees: &*(it + n) == &*it + n
+ *    - Examples: vector, array, raw pointers
+ * 
+ * Key Points:
+ * - All standard containers provide iterators
+ * - Range-based for uses begin()/end()
+ * - Iterator traits available via iterator_traits
+ * - Contiguous iterators enable low-level optimizations
+ */
+
+
+
+
+
+
 template <typename input_iterator>
 void find_most_often_number( input_iterator begin, input_iterator end ) // > size/2
 {
-	auto x = *begin; // not always correct, because it not always the type of elements of the contaner (Bit_reference)
+	auto x = *begin; // not always correct, because it not always the type of elements of the contaner (Bit_reference for vector<bool> )
 	
 	// iterator traits - знают много чего про iterator, value_type, pointer, reference, iterator_category - категория это пустая структура (тег), нужно только чтобы проверять на равенство их с другими типами и всё
 	
 	//  typename because it depended name, по умолчанию будет считатся переенной?
+	
+	// 
+	
 	typename std::iterator_traits<input_iterator>::value_type y = *begin; // correct
 	
 }
 
 template <typename T>
-void f(T) = delete;
+void f(T) = delete; 
 
 
 
@@ -24,39 +70,8 @@ int main()
 {
 	
 	std::vector<bool> vb(10);
-	
-	f( *vb.begin() ); // std::_Bit_reference
-	
-	
-	
-	// Iterator - type that can do operator* and operator++ and operator== and обходить последовательности 
-	
-	// simple pointer is iterator, smart pointer is not
-	
-	// *, ++, == - input_iterator ( maybe without ==)
-	// exmaples
-	
-	// forward_iterator = input_iterator and guarantee that if you will iterate over some container many times, you will see the same elements (not changed )over and over
-	// examples: forward_list, unordered_set, unordered_map
-	
-	
-	// bidirectional_iterator = forward_iterator and operator--
-	// examples: list, set, map
-	
-	// inside every container (in std) there is definded inner iterator type (std::vector<T>::iterator, std::deque<T>::iterator)
-	
-	// every container has iterator by definition (//cppreference -> named requirements) ( we can use "range based for"?)
-	
-	// random_access_iterator = bidirectional_iterator and += number, -=number, iter - iter, < , > , <=, >= ( you can define it operators for bidirectional_iterator and formally it would be a random_access_iterator, but it will be useless, why? ) 
-	// examples: deque
-	
-	// since C++17:
-	// contiguous_iterator  = random_access_iterator and ( equavalent to pointer, means  *(&(*(iter)) + n ) = *(iter + n), means that сложение итераторов это просто хождение по памяти на n шагов ( в deque it is not true because elements in not contiguous in memory )   ) 
-	// examples: vector, array, T*
-	
-	
-	// constexpr before function declaration
-	
+
+
 	std::set<int> s;
 	
 	// auto - since C++11
@@ -74,9 +89,7 @@ int main()
 	// alogoritms над последовательностями классифицируется не только по сложности, но и по требованиям на итератор
 	
 	// std::next_permutation - bidirectional_iterator
-	
 	// bubble_sort - forward_iterator
-	
 	//std::stable_sort - random_access_iterator
 	
 	

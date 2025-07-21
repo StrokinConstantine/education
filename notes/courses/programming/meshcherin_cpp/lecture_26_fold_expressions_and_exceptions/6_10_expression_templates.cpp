@@ -58,7 +58,7 @@ class VecSum : public VecExpression<VecSum<E1, E2> > { // crtp
         assert(u.size() == v.size());
     }
     decltype(auto) operator[](size_t i) const { return _u[i] + _v[i]; }
-    size_t size()               const { return _v.size(); }
+    size_t size()  const { return _v.size(); }
 };
   
 template <typename E1, typename E2>
