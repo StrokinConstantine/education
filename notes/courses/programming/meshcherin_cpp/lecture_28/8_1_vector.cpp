@@ -4,16 +4,18 @@
 
 // 8_containers
 
+// TODO: add constructors with allocators 
 
 // we can use memcpy, but it will not work if T has a pointer or reference to its field ( std::string has one )
 
-template <typename T>
+template <typename T, typename allocator = std::allocator<T>>
 class vector
 {
     T* arr;      // Pointer to the underlying array
     size_t sz;   // Current number of elements (size)
     size_t cap;  // Current capacity (allocated memory)
-    
+    allocator alloc; 
+	
     void reserve(size_t new_cap) {
         if (new_cap <= cap)
             return;  // No need to reallocate if we have enough capacity
@@ -28,8 +30,12 @@ class vector
         // Allocate raw memory - may throw std::bad_alloc
         // Note: Exception safety is preserved here because if allocation fails,
         // no existing resources are affected
-        new_arr = reinterpret_cast<T*>(new char[new_cap * sizeof(T)]);  // Still problematic
-        
+		
+		
+        // T* new_arr = reinterpret_cast<T*>(new char[new_cap * sizeof(T)]);  // Still problematic
+        T* new_arr = alloc.allocate( new_cap ); 
+		
+		
         size_t i = 0;
 		
         try {
@@ -42,8 +48,9 @@ class vector
                 // - Assignment operator requires valid objects on both sides
                 
                 // CORRECT APPROACH: Placement new construction
-                new (new_arr + i) T(arr[i]);  // Constructs T object in-place
-                
+                // new (new_arr + i) T(arr[i]);  // Constructs T object in-place
+                alloc.construct( new_arr + i, arr[i] );
+				
                 // Important notes about placement new:
                 // 1. Doesn't allocate memory (uses pre-allocated space)
                 // 2. The placement new itself cannot throw
@@ -59,19 +66,21 @@ class vector
             // If any constructor throws, we must:
             // 1. Destroy all successfully constructed objects
             for (size_t j = 0; j < i; ++j) 
-                (new_arr + j)->~T();  // Explicit destructor call
-                // Note: Destructors must not throw (undefined behavior if they do)
+                // (new_arr + j)->~T();  // Explicit destructor call
+               alloc.destroy( new_arr + j );
+			   // Note: Destructors must not throw (undefined behavior if they do)
             // 2. Free the allocated memory
-            delete[] reinterpret_cast<char*>(new_arr);  // delete won't throw
-            // 3. Propagate the exception
+            //delete[] reinterpret_cast<char*>(new_arr);  // delete won't throw
+            alloc.deallocate( new_arr, new_cap );
+			// 3. Propagate the exception
             throw;
         }
         
         // Cleanup old array:
         // Destroy all existing objects
         for (size_t i = 0; i < sz; ++i)
-            (arr + i)->~T();
-        
+            //(arr + i)->~T();
+			alloc.deallocate( arr + i, new_cap );
         // BAD PRACTICE 3: Incorrect deallocation
         // delete[] arr;
         // Problems:
@@ -80,8 +89,8 @@ class vector
         // 3. Will try to call destructors on wrong number of elements
         
         // CORRECT APPROACH: Match allocation type
-        delete[] reinterpret_cast<char*>(arr);
-        
+        // delete[] reinterpret_cast<char*>(arr);
+        alloc.deallocate( arr, cap );
         // Update vector state
         arr = new_arr;
         cap = new_cap;

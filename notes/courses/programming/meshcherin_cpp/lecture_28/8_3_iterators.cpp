@@ -3,8 +3,6 @@
 #include <set>
 #include <iterator>
 
-
-
 /*
  * Iterator Categories Hierarchy:
  * 
@@ -91,18 +89,18 @@ int main()
 	// std::next_permutation - bidirectional_iterator
 	// bubble_sort - forward_iterator
 	//std::stable_sort - random_access_iterator
-	
+		// std::copy - input_iterator, output_iterator( we can write )
 	
 	// forward_iterator гарантирует что мы может ходить по последовательности больше одного раза ( требуется умение перейти на следующий элемент, но всё еще смотреть на предыдущий ),  input_iterator так не умеет, у него даже нет постфиксного интератора, ( есть у forward_iterator )
-	
-	// std::copy - input_iterator, output_iterator( we can write )
-	
+		// input_iterator = один проход последовательности
+
+
+
+
 	// we know that in sequence every number встречается two times, except one number which встречается one time, effective solution - XOR of entire sequence! - input_iterator
 
-	// input_iterator = один проход последовательности
-	
+
 	// number that встречается более чем половину раз ( > size/2 ), решить задачу с input_iterator это более строгое условие на алгоритм
-	
  	// решение - аналогия с танцами, очередной человек, если находит пару с отличающимся от него человеком, то он идёт в пару 
 	// мы помним 2 числа - число и количество раз которое он встретилось
 	// если очередное совпадает, то увеличиваем счетчик, иначе одно из своих чисел отдаём в пару и уменьшаем счетчик, в конце гарантированно останется одно наше число
@@ -125,7 +123,7 @@ int main()
 		D std::deque::push_back работает за Constant (not amortized constant) why? 
 		Сложность оценивается относительно операций над T, а операции над сырой патятью и pointers не учитывается, т.к. непонятно какая у них сложность
 		
-		 exception safety = reallocate everything backwards
+		 exception safety = reallocate everything backwards if excpetion is thrown
 	
 	*/
 	return 0;

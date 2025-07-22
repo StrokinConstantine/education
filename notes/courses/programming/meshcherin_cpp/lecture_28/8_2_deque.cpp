@@ -31,7 +31,7 @@ int main()
 	std::cout << *ptr_2;
 	
 	// vector invalidates references and pointers after it was changed ( pop_back() does not invalidate, except the element you poped )
-	// shrink_to_fit also  invalides because of reallocation ( not every OS supports function (free only part of memory (unused memory to shrink_to_fit)) )
+	// shrink_to_fit also  invalides because of reallocation ( not every OS supports function "free only part of allocated memory" (unused memory to shrink_to_fit)) )
 	
 	
 	
