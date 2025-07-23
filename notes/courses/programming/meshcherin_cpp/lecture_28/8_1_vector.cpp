@@ -6,15 +6,24 @@
 
 // TODO: add constructors with allocators 
 
+// библиотека boost 
+
 // we can use memcpy, but it will not work if T has a pointer or reference to its field ( std::string has one )
 
+// task : list on stack allocator that faster than standard list
+
 template <typename T, typename allocator = std::allocator<T>>
+// class vector : private allocator { to EBO
 class vector
 {
     T* arr;      // Pointer to the underlying array
     size_t sz;   // Current number of elements (size)
     size_t cap;  // Current capacity (allocated memory)
-    allocator alloc; 
+    allocator alloc;
+	
+	//since C++20: attribute [[no_unique_address]:
+	// [[no_unique_address]] allocator alloc;
+	
 	
     void reserve(size_t new_cap) {
         if (new_cap <= cap)
@@ -33,8 +42,11 @@ class vector
 		
 		
         // T* new_arr = reinterpret_cast<T*>(new char[new_cap * sizeof(T)]);  // Still problematic
-        T* new_arr = alloc.allocate( new_cap ); 
+        //T* new_arr = alloc.allocate( new_cap ); 
+		std::allocator_traits( alloc )::allocate( alloc, new_cap );
+		std::allocator_traits( alloc )::allocate( new_cap );
 		
+		// allocate, deallocate есть в allocator_traits просто для симметрии, хотя в аллокаторе они должны быть.
 		
         size_t i = 0;
 		
